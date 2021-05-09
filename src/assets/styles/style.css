@@ -1,0 +1,156 @@
+.App {
+  padding: 0 16rem;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1 {
+  margin: 10px 0;
+}
+p {
+  margin: 5px 0;
+}
+
+/* header start */
+.header {
+  margin-top: 0.9rem;
+  margin-bottom: 1.1rem; 
+}
+
+.city {
+  font-weight: bold;
+}
+
+.searchWrapper {
+  display: flex;
+}
+
+.searchInput {
+  padding: 0.5rem;
+  width: 50%;
+  margin-right: 2rem;
+  border-radius: 0.5rem;
+}
+
+.searchButton {
+  background-color:darkblue;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+}
+/* header end */
+
+/* todaysForecast start */
+.todaysForecastWrapper {
+  margin-bottom: 1.1rem;
+}
+
+.todaysDate {
+  font-size: 0.8rem;
+  color: red;
+}
+
+.presentLocation {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.todaysForecast {
+  display: flex;
+  align-items: center;
+}
+
+.weatherImg {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: block;
+}
+
+.todaysTempature {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.todaysDetail {
+
+}
+
+.todaysDetailTop {
+  font-weight: bold;
+  margin-bottom: 0px;
+  font-size: 0.8rem;
+}
+
+.todaysDetailBottom {
+  font-size: 0.8rem;
+}
+/* todaysDetail end */
+
+/* main start */
+.main {
+  display: flex;
+}
+
+.everyHour {
+  font: 0.5rem;
+  font-weight: bold;
+}
+
+.tempaturesLineGraph {
+
+}
+
+.weatherLists {
+  width: 10rem;
+}
+
+.weatherListsTop {
+  font-weight: bold;
+}
+
+.weatherList {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 0.1rem;
+}
+
+.weatherListDate {
+
+}
+/* main end */
+
