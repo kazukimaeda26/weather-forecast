@@ -18,7 +18,10 @@ const TodaysDate = () => {
       year: year,
       month: month,
       day: day,
-      wday: wday
+      wday: wday,
+      hour: hour,
+      minute: minute,
+      sec: sec
     })
 
   return (
