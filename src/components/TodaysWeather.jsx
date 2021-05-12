@@ -1,13 +1,13 @@
 import React from 'react';
 import sample from '../assets/img/sample.png';
 
-const TodaysWeather = () => {
+const TodaysWeather = (props) => {
   return(
     <div className="todaysForecastWrapper">
       <div className="todaysDate">
         XX月XX日 現在時刻
       </div>
-      <div className="presentLocation">現在地</div>
+      <div className="currentLocation" id="currentLocation">現在地：{props.location}</div>
       <div className="todaysForecast">
         <img src={sample} alt="画像" className="weatherImg" />
         <p className="todaysTempature">0℃</p>
