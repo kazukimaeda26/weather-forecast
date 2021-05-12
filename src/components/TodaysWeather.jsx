@@ -1,6 +1,5 @@
 import React from 'react';
 import sample from '../assets/img/sample.png';
-import {TodaysDate, CurrentLocation} from './index';
 
 
 const TodaysWeather = (props) => {
