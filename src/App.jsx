@@ -20,26 +20,34 @@ function App() {
 
       const lat = data.location.lat;
       const lng = data.location.lng;
+      setLat(lat);
+      setLng(lng);
 
       const reverseGeocodingUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&' + 'key='+ googleApiKey
-      console.log(reverseGeocodingUrl);
+      // console.log(reverseGeocodingUrl);
 
       fetch(reverseGeocodingUrl,{
         method: 'POST'
       })
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
+        var currentLocation = data.results[0].address_components[6].long_name
+        setLocation(currentLocation);
       })
     });
   }
 
-  const initialLocation = '大阪'
-  const [location, setLocation] = useState(initialLocation);
+  const [lat, setLat] = useState(34.6555126);
+  const [lng, setLng] = useState(135.4969213);
+  const [location, setLocation] = useState('gotema')
+
+  useEffect( () => {
+    fetchCurrentLocation();
+  },[])
 
   return (
     <div className="App">
-      <Header setLocation={setLocation} fetchCurrentLocation={fetchCurrentLocation}/>
+      <Header setLat={setLat} setLng={setLng} fetchCurrentLocation={fetchCurrentLocation} setLocation={setLocation}/>
       <TodaysWeather location={location}/>
       <div className="main">
         <div className="tempaturesLineGraph">
