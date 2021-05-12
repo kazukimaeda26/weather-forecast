@@ -9,7 +9,9 @@ import {TodaysWeather, WeatherLists, Header} from './components/index';
 function App() {
 
   const fetchCurrentLocation = () => {
-    const googleApiKey = 'AIzaSyDC7DYNlShAnWtlS_uaruVGS1hG38xV3MA'
+    console.log(process.env);
+
+    const googleApiKey = process.env.REACT_APP_DEV_GOOGLE_API_KEY
     const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + googleApiKey
 
     fetch(googleApiUrl,{
@@ -37,6 +39,13 @@ function App() {
     });
   }
 
+  const fetchTodaysWeather = () => {
+    const city = 'gotemba'
+    const openWeatherAPiKey = process.env.REACT_APP_DEV_OPEN_WEATHER_KEY
+    const openWeatherApiUrl = 'api.openweathermap.org/data/2.5/weather?q='+ city + '&appid='+ openWeatherAPiKey
+    console.log(openWeatherApiUrl);
+  }
+
   //osakaのlatとlng
   const [lat, setLat] = useState(34.6555126);
   const [lng, setLng] = useState(135.4969213);
@@ -45,6 +54,10 @@ function App() {
   useEffect( () => {
     fetchCurrentLocation();
   },[])
+
+  useEffect( () => {
+    fetchTodaysWeather();
+  })
 
   return (
     <div className="App">
