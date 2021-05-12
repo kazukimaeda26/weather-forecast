@@ -37,6 +37,7 @@ function App() {
     });
   }
 
+  //osakaのlatとlng
   const [lat, setLat] = useState(34.6555126);
   const [lng, setLng] = useState(135.4969213);
   const [location, setLocation] = useState('gotema')
