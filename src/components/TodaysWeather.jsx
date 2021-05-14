@@ -1,4 +1,5 @@
 import React from 'react';
+import {TodaysDate} from './index';
 
 const TodaysWeather = (props) => {
   const createWeatherImgUrl = (iconNum) => {
@@ -18,9 +19,7 @@ const TodaysWeather = (props) => {
   const humidity = props.todaysWeather.humidity;
   return(
     <div className="todaysForecastWrapper">
-      <div className="todaysDate">
-        XX月XX日 現在時刻
-      </div>
+      <TodaysDate />
       <div className="currentLocation" id="currentLocation">現在地：{props.location}</div>
       <div className="todaysForecast">
         <img src={weatherIconUrl} alt="画像" className="weatherImg" />

@@ -17,10 +17,10 @@ function App() {
     })
     .then(response => response.json())
     .then((data) =>{
-      const lat = data.location.lat;
-      const lng = data.location.lng;
+      setLat(data.location.lat);
+      setLng(data.location.lng);
 
-      const reverseGeocodingUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&language=ja&' + 'key='+ googleApiKey
+      const reverseGeocodingUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&language=ja&'+'key='+googleApiKey
 
       fetch(reverseGeocodingUrl,{
         method: 'POST'
