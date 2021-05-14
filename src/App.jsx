@@ -9,7 +9,7 @@ import {TodaysWeather, WeatherLists, Header} from './components/index';
 function App() {
 
   const fetchCurrentLocation = () => {
-    const googleApiKey = process.env.REACT_APP_GOOGLE_API_KEY
+    const googleApiKey = process.env.REACT_APP_DEV_GOOGLE_API_KEY
     const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?language=ja&key=' + googleApiKey
 
     fetch(googleApiUrl,{
@@ -38,7 +38,7 @@ function App() {
 
   const fetchTodaysWeather = () => {
     const city = '御殿場'
-    const openWeatherAPiKey = process.env.REACT_APP_DEV_OPEN_WEATHER_KEY
+    const openWeatherAPiKey = process.env.REACT_APP_DEV_OPEN_WEATHER_API_KEY
 
     const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city +'&lang=ja&appid=' + openWeatherAPiKey
   
@@ -94,7 +94,7 @@ function App() {
   },[])
 
   useEffect( () => {
-    // fetchTodaysWeather();
+    fetchTodaysWeather();
   },[])
 
   return (
