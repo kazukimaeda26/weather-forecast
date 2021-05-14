@@ -9,7 +9,7 @@ import {TodaysWeather, WeatherLists, Header} from './components/index';
 function App() {
 
   const fetchCurrentLocation = () => {
-    const googleApiKey = process.env.REACT_APP_DEV_GOOGLE_API_KEY
+    const googleApiKey = process.env.REACT_APP_GOOGLE_API_KEY
     const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?language=ja&key=' + googleApiKey
 
     fetch(googleApiUrl,{
@@ -17,6 +17,7 @@ function App() {
     })
     .then(response => response.json())
     .then((data) =>{
+      console.log(data);
 
       const lat = data.location.lat;
       const lng = data.location.lng;
