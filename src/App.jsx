@@ -17,8 +17,6 @@ function App() {
     })
     .then(response => response.json())
     .then((data) =>{
-      console.log(data);
-
       const lat = data.location.lat;
       const lng = data.location.lng;
 
@@ -31,7 +29,6 @@ function App() {
       .then((data) => {
         var currentLocation = data.results[0].address_components[6].long_name
         setLocation(currentLocation);
-        console.log(currentLocation);
       })
     });
   }
@@ -47,7 +44,6 @@ function App() {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       const iconNum = data.weather[0].icon
       const temp = data.main.temp
       const feelsLike = data.main.feels_like
@@ -69,7 +65,6 @@ function App() {
         humidity: humidity
       })
     })
-    console.log(todaysWeather);
   }
 
   //osakaのlatとlng
@@ -78,7 +73,7 @@ function App() {
   const [location, setLocation] = useState('御殿場')
 
   const [todaysWeather, setTodaysWeather] = useState({
-    iconUrl: 'http://openweathermap.org/img/wn/10d@2x.png',
+    iconNum: '10d',
     temp: 20,
     feelsLike: 18,
     tempMax: 23,
