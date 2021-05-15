@@ -3,7 +3,6 @@ import React from 'react';
 import {WeatherList} from './index';
 
 const WeatherLists = (props) => {
-  console.log(props)
   let date1 = new Date();
   let date2 = new Date();
   let date3 = new Date();
@@ -11,12 +10,12 @@ const WeatherLists = (props) => {
   let date5 = new Date();
   let date6 = new Date();
   let date7 = new Date();
-  date2.setDate(date1.getDate()+1);
-  date3.setDate(date1.getDate()+2);
-  date4.setDate(date1.getDate()+3);
-  date5.setDate(date1.getDate()+4);
-  date6.setDate(date1.getDate()+5);
-  date7.setDate(date1.getDate()+6);
+  date2.setDate(date2.getDate()+1);
+  date3.setDate(date3.getDate()+2);
+  date4.setDate(date4.getDate()+3);
+  date5.setDate(date5.getDate()+4);
+  date6.setDate(date6.getDate()+5);
+  date7.setDate(date7.getDate()+6);
 
   const sevenDays = [
     {month: date1.getMonth()+1, day: date1.getDate(), icon: props.weekWeather.first.icon, tempMax: props.weekWeather.first.tempMax, tempMin: props.weekWeather.first.tempMin},
