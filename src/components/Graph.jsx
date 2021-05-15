@@ -1,4 +1,3 @@
-import { ContactSupportOutlined } from '@material-ui/icons';
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -68,8 +67,6 @@ const Graph = (props) => {
       name: hours[12]+'時',
       temp: kelvinToCelsius(props.hoursTempature.twelve)
     })
-    console.log(props.hoursTempature);
-    console.log(data);
   
   return(
     <ResponsiveContainer width="100%" height="100%">

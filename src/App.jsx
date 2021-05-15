@@ -1,3 +1,4 @@
+import { ContactSupportOutlined } from '@material-ui/icons';
 import React,{useState, useEffect} from 'react';
 import './assets/styles/style.css';
 
@@ -9,6 +10,7 @@ function App() {
   const googleApiKey = process.env.REACT_APP_DEV_GOOGLE_API_KEY
   const openWeatherApiKey = process.env.REACT_APP_DEV_OPEN_WEATHER_API_KEY
 
+  //setLocationを動かす
   const fetchCurrentLocation = () => {
     const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?language=ja&key=' + googleApiKey
 
@@ -33,11 +35,35 @@ function App() {
     });
   }
 
-  const fetchTodaysWeather = () => {
-    const city = '御殿場'
+  //setLat setLngを動かす
+  const setSearchedLocation = () => {
+    const input = document.querySelector('#searchInput').value;
+    // console.log(input);
+    // console.log("a");
+    setLocation(input);
+    setLocation(input);
+    // console.log(location);
+    const searchLocationApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ location +'&language=ja&key='+ googleApiKey;
 
-    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city +'&lang=ja&appid=' + openWeatherApiKey
-  
+    fetch(searchLocationApiUrl,{
+      method: 'POST'
+    })
+    .then(response => response.json())
+    .then((data) => {
+      // console.log(data)
+      setLat(data.results[0].geometry.location.lat);
+      setLng(data.results[0].geometry.location.lng);
+      console.log(lat);
+    })
+  }
+
+  //setTodayWeatherを動かす
+  const fetchTodaysWeather = () => {
+    // console.log(location);
+    // console.log(lat);
+    // console.log(lng);
+    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + location +'&lang=ja&appid=' + openWeatherApiKey
+    
     fetch(openWeatherApiUrl,{
       method: 'POST'
     })
@@ -66,14 +92,18 @@ function App() {
     })
   }
 
-  const fetchWeekWeather = (lat, lon) => {
-    const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon=' + lon + '&lang=ja&appid='+ openWeatherApiKey;
+  //setHoursTempature, setWeekWeatherを動かす
+  const fetchWeekWeather = () => {
+    // console.log(lat);
+    // console.log(lng);
+    const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon=' + lng + '&lang=ja&appid='+ openWeatherApiKey;
 
     fetch(openWeatherOneCallApiUrl,{
       method: 'POST'
     })
     .then( response => response.json())
     .then((data) => {
+      // console.log(data);
       setWeekWeather({
         first: {
           icon: data.daily[0].weather[0].icon,
@@ -197,8 +227,7 @@ function App() {
     ten: 25,
     eleven: 25,
     twelve: 25,
-  }
-)
+  })
 
   let initialCurrentTime = new Date();
   let year = initialCurrentTime.getUTCFullYear()
@@ -223,30 +252,21 @@ function App() {
     sec: sec
   })
 
-
   useEffect( () => {
     fetchCurrentLocation();
   }, [])
 
   useEffect( () => {
     fetchTodaysWeather();
-  }, [])
+  }, [location])
 
   useEffect( () => {
-    fetchWeekWeather(lat, lng);
-  }, [])
-
-  // useEffect( () => {
-  //   setHoursTempature();
-  // }, [])
-
-  // useEffect( () => {
-  //   setCurrentTime();
-  // },[])
+    fetchWeekWeather();
+  },[lat])
 
   return (
     <div className="App">
-      <Header setLat={setLat} setLng={setLng} fetchCurrentLocation={fetchCurrentLocation} setLocation={setLocation}/>
+      <Header setSearchedLocation={setSearchedLocation}/>
       <TodaysWeather location={location} todaysWeather={todaysWeather} currentTime={currentTime}/>
       <div className="main">
         <div className="tempaturesLineGraph">
