@@ -1,7 +1,6 @@
 import React from 'react';
 
 const WeatherList = (props) => {
-  console.log(props)
   const createWeatherImgUrl = (iconNum) => {
     return 'http://openweathermap.org/img/wn/' + iconNum + '@2x.png';
   }

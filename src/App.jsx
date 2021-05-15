@@ -1,10 +1,8 @@
 import React,{useState, useEffect} from 'react';
 import './assets/styles/style.css';
 
-// import images
-import tempatureLineGraph from './assets/img/tempature.png'
+import {TodaysWeather, WeatherLists, Header, Graph} from './components/index';
 
-import {TodaysWeather, WeatherLists, Header} from './components/index';
 
 function App() {
   
@@ -113,6 +111,21 @@ function App() {
           tempMin: data.daily[6].temp.min
         },
       })
+      setHoursTempature({
+        zero: data.hourly[0].temp,
+        one: data.hourly[1].temp,
+        two: data.hourly[2].temp,
+        three: data.hourly[3].temp,
+        four: data.hourly[4].temp,
+        five: data.hourly[5].temp,
+        six: data.hourly[6].temp,
+        seven:data.hourly[7].temp,
+        eight:data.hourly[8].temp,
+        nine: data.hourly[9].temp,
+        ten: data.hourly[10].temp,
+        eleven: data.hourly[11].temp,
+        twelve: data.hourly[12].temp
+      })
     })
   }
 
@@ -170,6 +183,22 @@ function App() {
       tempMin: 23
     }
   })
+  const [hoursTempature, setHoursTempature] = useState({
+    zero: 25,
+    one: 25,
+    two: 25,
+    three: 25,
+    four: 25,
+    five: 25,
+    six: 25,
+    seven: 25,
+    eight: 25,
+    nine: 25,
+    ten: 25,
+    eleven: 25,
+    twelve: 25,
+  }
+)
 
   let initialCurrentTime = new Date();
   let year = initialCurrentTime.getUTCFullYear()
@@ -208,10 +237,12 @@ function App() {
   }, [])
 
   // useEffect( () => {
+  //   setHoursTempature();
+  // }, [])
+
+  // useEffect( () => {
   //   setCurrentTime();
   // },[])
-
-
 
   return (
     <div className="App">
@@ -219,8 +250,10 @@ function App() {
       <TodaysWeather location={location} todaysWeather={todaysWeather} currentTime={currentTime}/>
       <div className="main">
         <div className="tempaturesLineGraph">
-          <p className="everyHour">1時間ごとの予測</p>
-          <img src={tempatureLineGraph} alt="折れ線グラフ" />
+          <p className="everyHour">1時間ごとの気温</p>
+          <div className="graphWrapper">
+            <Graph hoursTempature={hoursTempature}/>
+          </div>
         </div>
         <WeatherLists weekWeather={weekWeather}/>
       </div>
