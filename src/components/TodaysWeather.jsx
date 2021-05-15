@@ -1,4 +1,5 @@
 import React from 'react';
+import {TodaysDate} from './index';
 
 const TodaysWeather = (props) => {
   const createWeatherImgUrl = (iconNum) => {
@@ -18,9 +19,7 @@ const TodaysWeather = (props) => {
   const humidity = props.todaysWeather.humidity;
   return(
     <div className="todaysForecastWrapper">
-      <div className="todaysDate">
-        XX月XX日 現在時刻
-      </div>
+      <TodaysDate currentTime={props.currentTime}/>
       <div className="currentLocation" id="currentLocation">現在地：{props.location}</div>
       <div className="todaysForecast">
         <img src={weatherIconUrl} alt="画像" className="weatherImg" />
@@ -31,7 +30,7 @@ const TodaysWeather = (props) => {
           体感温度：{feelsLike}℃　最高気温：{tempMax}℃　最低気温：{tempMin}℃
         </p>
         <p className="todaysDetailBottom">
-          風：{windSpeed}m/s　北寄りの風　気圧：{pressure}hPa　湿度：{humidity}%
+          風：{windSpeed}m/s　北寄りの風（要変更）　気圧：{pressure}hPa　湿度：{humidity}%
         </p>
       </div>
     </div>

@@ -1,15 +1,23 @@
 import React from 'react';
 
-import sample from '../assets/img/sample.png'
+const WeatherList = (props) => {
+  console.log(props)
+  const createWeatherImgUrl = (iconNum) => {
+    return 'http://openweathermap.org/img/wn/' + iconNum + '@2x.png';
+  }
 
+  const kelvinToCelsius = (num) => {
+    return Math.floor((num - 273.15)*10)/10;
+  }
 
-const WeatherList = () => {
+  const iconUrl = createWeatherImgUrl(props.value.icon);
   return(
     <div className="weatherList">
       <div className="weatherListDate">
-        4月1日
+        {props.value.month}月{props.value.day}日
       </div>
-      <img className="weatherImg" src={sample} alt="画像" />
+      <img className="weatherImg" src={iconUrl} alt="画像" />
+      <p className="weatherListTemp">{kelvinToCelsius(props.value.tempMax)} ℃/{kelvinToCelsius(props.value.tempMin)}℃</p>
     </div>
   )
 }
