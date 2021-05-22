@@ -20,7 +20,7 @@ const TodaysWeather = (props) => {
   return(
     <div className="todaysForecastWrapper">
       <TodaysDate currentTime={props.currentTime}/>
-      <div className="currentLocation" id="currentLocation">現在地：{props.location}</div>
+      <div className="currentLocation" id="currentLocation">現在地：{props.cityName}</div>
       <div className="todaysForecast">
         <img src={weatherIconUrl} alt="画像" className="weatherImg" />
         <p className="todaysTempature">{temp}℃</p>
