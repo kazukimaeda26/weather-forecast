@@ -89,7 +89,6 @@ function App() {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       if(data.tatus === "ZERO_RESULTS"){
 
       }
@@ -103,7 +102,6 @@ function App() {
 
   //setTodayWeatherを動かす
   const fetchTodaysWeather = () => {
-    console.log(latLng);
     const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latLng.lat + '&lon=' + latLng.lng +'&lang=ja&appid=' + openWeatherApiKey
 
     fetch(openWeatherApiUrl,{
@@ -111,7 +109,6 @@ function App() {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       const iconNum = data.weather[0].icon
       const temp = data.main.temp
       const feelsLike = data.main.feels_like
