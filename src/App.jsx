@@ -22,43 +22,7 @@ function App() {
     pressure: 1020,
     humidity: 55
   });
-  const [weekWeather, setWeekWeather] = useState({
-    first: {
-      icon: '04d',
-      tempMax: 18,
-      tempMin: 17
-    },
-    second: {
-      icon: '04d',
-      tempMax: 19,
-      tempMin: 18
-    },
-    third: {
-      icon: '04d',
-      tempMax: 20,
-      tempMin: 19
-    },
-    fourth: {
-      icon: '04d',
-      tempMax: 21,
-      tempMin: 20
-    },
-    fifth: {
-      icon: '04d',
-      tempMax: 22,
-      tempMin: 21
-    },
-    sixth: {
-      icon: '04d',
-      tempMax: 23,
-      tempMin: 22
-    },
-    seventh: {
-      icon: '04d',
-      tempMax: 24,
-      tempMin: 23
-    }
-  })
+  const [weekWeather, setWeekWeather] = useState([]);
   const [hoursTempature, setHoursTempature] = useState({
     zero: 25,
     one: 25,
@@ -125,6 +89,7 @@ function App() {
     })
     .then(response => response.json())
     .then((data) => {
+      console.log(data);
       if(data.tatus === "ZERO_RESULTS"){
 
       }
@@ -134,21 +99,19 @@ function App() {
         setLatLng({lat: lat, lng: lng});
       }
     })
-
   }
 
   //setTodayWeatherを動かす
   const fetchTodaysWeather = () => {
-    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName +'&lang=ja&appid=' + openWeatherApiKey
-    
+    console.log(latLng);
+    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latLng.lat + '&lon=' + latLng.lng +'&lang=ja&appid=' + openWeatherApiKey
+
     fetch(openWeatherApiUrl,{
       method: 'POST'
     })
     .then(response => response.json())
     .then((data) => {
-      // console.log(data.weather);
-      // console.log(data.weather[0]);
-      // console.log(data.weather[0].icon);
+      console.log(data);
       const iconNum = data.weather[0].icon
       const temp = data.main.temp
       const feelsLike = data.main.feels_like
@@ -176,6 +139,8 @@ function App() {
     fetchTodaysWeather();
   },[cityName]);
 
+
+  let weekWeatherArray = [];
   //setHoursTempature, setWeekWeatherを動かす
   const fetchWeekWeather = () => {
     const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latLng.lat +'&lon=' + latLng.lng + '&lang=ja&appid='+ openWeatherApiKey;
@@ -185,43 +150,15 @@ function App() {
     })
     .then( response => response.json())
     .then((data) => {
-      setWeekWeather({
-        first: {
-          icon: data.daily[0].weather[0].icon,
-          tempMax: data.daily[0].temp.max,
-          tempMin: data.daily[0].temp.min
-        },
-        second: {
-          icon: data.daily[1].weather[0].icon,
-          tempMax: data.daily[1].temp.max,
-          tempMin: data.daily[1].temp.min
-        },
-        third: {
-          icon: data.daily[2].weather[0].icon,
-          tempMax: data.daily[2].temp.max,
-          tempMin: data.daily[2].temp.min
-        },
-        fourth: {
-          icon: data.daily[3].weather[0].icon,
-          tempMax: data.daily[3].temp.max,
-          tempMin: data.daily[3].temp.min
-        },
-        fifth: {
-          icon: data.daily[4].weather[0].icon,
-          tempMax: data.daily[4].temp.max,
-          tempMin: data.daily[4].temp.min,
-        },
-        sixth: {
-          icon: data.daily[5].weather[0].icon,
-          tempMax: data.daily[5].temp.max,
-          tempMin: data.daily[5].temp.min
-        },
-        seventh: {
-          icon: data.daily[6].weather[0].icon,
-          tempMax: data.daily[6].temp.max,
-          tempMin: data.daily[6].temp.min
-        },
-      })
+      for(let i = 0; i < 7 ;i++) {
+        weekWeatherArray.push({
+          icon: data.daily[i].weather[0].icon,
+          tempMax: data.daily[i].temp.max,
+          tempMin: data.daily[i].temp.min
+        })
+      }
+      setWeekWeather(weekWeatherArray);
+      
       setHoursTempature({
         zero: data.hourly[0].temp,
         one: data.hourly[1].temp,
@@ -240,7 +177,9 @@ function App() {
     })
   }
 
-
+  useEffect(()=> {
+    fetchWeekWeather();
+  }, [cityName]);
 
 
   let initialCurrentTime = new Date();
@@ -266,15 +205,6 @@ function App() {
     minute: minute,
     sec: sec
   })
-
-
-  // useEffect( () => {
-  //   fetchTodaysWeather();
-  // }, [])
-
-  // useEffect( () => {
-  //   fetchWeekWeather();
-  // },[])
 
   return (
     <div className="App">
