@@ -1,4 +1,3 @@
-import { ContactSupportOutlined } from '@material-ui/icons';
 import React,{useState, useEffect} from 'react';
 import './assets/styles/style.css';
 
@@ -10,65 +9,146 @@ function App() {
   const googleApiKey = process.env.REACT_APP_DEV_GOOGLE_API_KEY
   const openWeatherApiKey = process.env.REACT_APP_DEV_OPEN_WEATHER_API_KEY
 
-  //setLocationを動かす
-  const fetchCurrentLocation = () => {
-    const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?language=ja&key=' + googleApiKey
+  const [latLng, setLatLng] = useState({lat: 30, lng: 130});
+  const [cityName, setCityName] = useState('札幌市');
+  const [todaysWeather, setTodaysWeather] = useState({
+    iconNum: '10d',
+    temp: 20,
+    feelsLike: 18,
+    tempMax: 23,
+    tempMin: 17,
+    windSpeed: 0,
+    windDeg: 350,
+    pressure: 1020,
+    humidity: 55
+  });
+  const [weekWeather, setWeekWeather] = useState({
+    first: {
+      icon: '04d',
+      tempMax: 18,
+      tempMin: 17
+    },
+    second: {
+      icon: '04d',
+      tempMax: 19,
+      tempMin: 18
+    },
+    third: {
+      icon: '04d',
+      tempMax: 20,
+      tempMin: 19
+    },
+    fourth: {
+      icon: '04d',
+      tempMax: 21,
+      tempMin: 20
+    },
+    fifth: {
+      icon: '04d',
+      tempMax: 22,
+      tempMin: 21
+    },
+    sixth: {
+      icon: '04d',
+      tempMax: 23,
+      tempMin: 22
+    },
+    seventh: {
+      icon: '04d',
+      tempMax: 24,
+      tempMin: 23
+    }
+  })
+  const [hoursTempature, setHoursTempature] = useState({
+    zero: 25,
+    one: 25,
+    two: 25,
+    three: 25,
+    four: 25,
+    five: 25,
+    six: 25,
+    seven: 25,
+    eight: 25,
+    nine: 25,
+    ten: 25,
+    eleven: 25,
+    twelve: 25,
+  })
+  
 
+  // 現在位置情報のlatとlngを定義する.
+  const fetchCurrentLatLng = () => {
+    const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?language=ja&key=' + googleApiKey
     fetch(googleApiUrl,{
       method: 'POST'
     })
     .then(response => response.json())
     .then((data) =>{
-      setLat(data.location.lat);
-      setLng(data.location.lng);
-
-      const reverseGeocodingUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&language=ja&'+'key='+googleApiKey
-
-      fetch(reverseGeocodingUrl,{
-        method: 'POST'
-      })
-      .then(response => response.json())
-      .then((data) => {
-        var currentLocation = data.results[0].address_components[6].long_name
-        setLocation(currentLocation);
-      })
+      let currentLat = data.location.lat;
+      let currentLng = data.location.lng;
+      setLatLng({lat: currentLat, lng: currentLng});
+      //現在位置緯度経度を取得したあとは,現在地の都市名を取得する
+      fetchCityNameFromLatLng(currentLat, currentLng);
     });
   }
 
-  //setLat setLngを動かす
+  const fetchCityNameFromLatLng = (currentLat, currentLng) => {
+    const reverseGeocodingUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+currentLat+','+currentLng+'&language=ja&'+'key='+googleApiKey
+    fetch(reverseGeocodingUrl,{
+      method: 'POST'
+    })
+    .then(response => response.json())
+    .then((data) => {
+      var cityName = data.results[0].address_components[6].long_name;
+      setCityName(cityName);
+    })
+  }
+
+  // didMount時に現在位置のlatとlngを取得するfetchCurrentLatLngを呼び出す.
+  useEffect( () => {
+    fetchCurrentLatLng();
+  }, []);
+
+  //都市名の検索があった場合,cityNameを検索した都市名で定義.
   const setSearchedLocation = () => {
     const input = document.querySelector('#searchInput').value;
-    // console.log(input);
-    // console.log("a");
-    setLocation(input);
-    setLocation(input);
-    // console.log(location);
-    const searchLocationApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ location +'&language=ja&key='+ googleApiKey;
+    setCityName(input);
+    fetchLatLngFromCityName(input);
+  }
+  
+  // 都市名からlatとlngを取得し,latとlngを定義する.
+  const fetchLatLngFromCityName = (input) => {
+    const searchLocationApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ input +'&language=ja&key='+ googleApiKey;
 
     fetch(searchLocationApiUrl,{
       method: 'POST'
     })
     .then(response => response.json())
     .then((data) => {
-      // console.log(data)
-      setLat(data.results[0].geometry.location.lat);
-      setLng(data.results[0].geometry.location.lng);
-      console.log(lat);
+      if(data.tatus === "ZERO_RESULTS"){
+
+      }
+      else{
+        const lat = data.results[0].geometry.location.lat;
+        const lng = data.results[0].geometry.location.lng; 
+        setLatLng({lat: lat, lng: lng});
+      }
     })
+
   }
 
   //setTodayWeatherを動かす
   const fetchTodaysWeather = () => {
-    // console.log(location);
-    // console.log(lat);
-    // console.log(lng);
-    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + location +'&lang=ja&appid=' + openWeatherApiKey
+    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName +'&lang=ja&appid=' + openWeatherApiKey
     
     fetch(openWeatherApiUrl,{
       method: 'POST'
     })
     .then(response => response.json())
     .then((data) => {
+      // console.log(data.weather);
+      // console.log(data.weather[0]);
+      // console.log(data.weather[0].icon);
       const iconNum = data.weather[0].icon
       const temp = data.main.temp
       const feelsLike = data.main.feels_like
@@ -92,18 +172,19 @@ function App() {
     })
   }
 
+  useEffect( () => {
+    fetchTodaysWeather();
+  },[cityName]);
+
   //setHoursTempature, setWeekWeatherを動かす
   const fetchWeekWeather = () => {
-    // console.log(lat);
-    // console.log(lng);
-    const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon=' + lng + '&lang=ja&appid='+ openWeatherApiKey;
+    const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latLng.lat +'&lon=' + latLng.lng + '&lang=ja&appid='+ openWeatherApiKey;
 
     fetch(openWeatherOneCallApiUrl,{
       method: 'POST'
     })
     .then( response => response.json())
     .then((data) => {
-      // console.log(data);
       setWeekWeather({
         first: {
           icon: data.daily[0].weather[0].icon,
@@ -159,75 +240,8 @@ function App() {
     })
   }
 
-  //osakaのlatとlng
-  const [lat, setLat] = useState(34.6555126);
-  const [lng, setLng] = useState(135.4969213);
-  const [location, setLocation] = useState('御殿場');
 
-  const [todaysWeather, setTodaysWeather] = useState({
-    iconNum: '10d',
-    temp: 20,
-    feelsLike: 18,
-    tempMax: 23,
-    tempMin: 17,
-    windSpeed: 0,
-    windDeg: 350,
-    pressure: 1020,
-    humidity: 55
-  });
 
-  const [weekWeather, setWeekWeather] = useState({
-    first: {
-      icon: '04d',
-      tempMax: 18,
-      tempMin: 17
-    },
-    second: {
-      icon: '04d',
-      tempMax: 19,
-      tempMin: 18
-    },
-    third: {
-      icon: '04d',
-      tempMax: 20,
-      tempMin: 19
-    },
-    fourth: {
-      icon: '04d',
-      tempMax: 21,
-      tempMin: 20
-    },
-    fifth: {
-      icon: '04d',
-      tempMax: 22,
-      tempMin: 21
-    },
-    sixth: {
-      icon: '04d',
-      tempMax: 23,
-      tempMin: 22
-    },
-    seventh: {
-      icon: '04d',
-      tempMax: 24,
-      tempMin: 23
-    }
-  })
-  const [hoursTempature, setHoursTempature] = useState({
-    zero: 25,
-    one: 25,
-    two: 25,
-    three: 25,
-    four: 25,
-    five: 25,
-    six: 25,
-    seven: 25,
-    eight: 25,
-    nine: 25,
-    ten: 25,
-    eleven: 25,
-    twelve: 25,
-  })
 
   let initialCurrentTime = new Date();
   let year = initialCurrentTime.getUTCFullYear()
@@ -241,6 +255,7 @@ function App() {
   let minute = initialCurrentTime.getUTCMinutes()
   let sec = initialCurrentTime.getSeconds()
 
+
   const [currentTime, setCurrentTime] = useState({
     wholeTime: initialCurrentTime,
     year: year,
@@ -252,22 +267,19 @@ function App() {
     sec: sec
   })
 
-  useEffect( () => {
-    fetchCurrentLocation();
-  }, [])
 
-  useEffect( () => {
-    fetchTodaysWeather();
-  }, [location])
+  // useEffect( () => {
+  //   fetchTodaysWeather();
+  // }, [])
 
-  useEffect( () => {
-    fetchWeekWeather();
-  },[lat])
+  // useEffect( () => {
+  //   fetchWeekWeather();
+  // },[])
 
   return (
     <div className="App">
       <Header setSearchedLocation={setSearchedLocation}/>
-      <TodaysWeather location={location} todaysWeather={todaysWeather} currentTime={currentTime}/>
+      <TodaysWeather cityName={cityName} todaysWeather={todaysWeather} currentTime={currentTime}/>
       <div className="main">
         <div className="tempaturesLineGraph">
           <p className="everyHour">1時間ごとの気温</p>
