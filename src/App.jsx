@@ -124,7 +124,6 @@ function App() {
     })
   }
 
-
   let initialCurrentTime = new Date();
   let year = initialCurrentTime.getUTCFullYear()
   let month = initialCurrentTime.getUTCMonth() + 1
@@ -153,7 +152,7 @@ function App() {
   }, []);
   useEffect( () => {
     fetchTodaysWeather();
-  },[cityName]);
+  }, [latLng]);
  useEffect(()=> {
     fetchWeekWeather();
   }, [latLng]);
