@@ -88,9 +88,10 @@ p {
   color: red;
 }
 
-.currentLocation {
+.cityNameWrapper {
   font-weight: bold;
   font-size: 1.3rem;
+  display: flex;
 }
 
 .todaysForecast {
