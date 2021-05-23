@@ -46,6 +46,9 @@ function App() {
     const input = document.querySelector('#searchInput').value;
     setCityName(input);
     fetchLatLngFromCityName(input);
+    document.querySelector('#searchInput').value = "";
+    const currentLocationOrSearcedLocation = document.querySelector('#currentLocationOrSearchedLocation');
+    currentLocationOrSearcedLocation.innerHTML = "検索地域：";
   }
   
   const fetchLatLngFromCityName = (input) => {
