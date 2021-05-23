@@ -6,7 +6,7 @@ const WeatherList = (props) => {
   }
 
   const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15)*10)/10;
+    return Math.floor((num - 273.15)*100)/100;
   }
 
   const iconUrl = createWeatherImgUrl(props.value.icon);
