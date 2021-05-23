@@ -15,8 +15,6 @@ function App() {
   const [weekWeather, setWeekWeather] = useState([]);
   const [tempsPerHour, setTempsPerHour] = useState([]);
   
-
-  // 現在位置情報のlatとlngを定義する.
   const fetchCurrentLatLng = () => {
     const googleApiUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?language=ja&key=' + googleApiKey
     fetch(googleApiUrl,{
@@ -44,19 +42,12 @@ function App() {
     })
   }
 
-  // didMount時に現在位置のlatとlngを取得するfetchCurrentLatLngを呼び出す.
-  useEffect( () => {
-    fetchCurrentLatLng();
-  }, []);
-
-  //都市名の検索があった場合,cityNameを検索した都市名で定義.
   const searchFromCityName = () => {
     const input = document.querySelector('#searchInput').value;
     setCityName(input);
     fetchLatLngFromCityName(input);
   }
   
-  // 都市名からlatとlngを取得し,latとlngを定義する.
   const fetchLatLngFromCityName = (input) => {
     const searchLocationApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ input +'&language=ja&key='+ googleApiKey;
 
@@ -76,7 +67,6 @@ function App() {
     })
   }
 
-  //setTodayWeatherを動かす
   const fetchTodaysWeather = () => {
     const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latLng.lat + '&lon=' + latLng.lng +'&lang=ja&appid=' + openWeatherApiKey
 
@@ -108,14 +98,8 @@ function App() {
     })
   }
 
-  useEffect( () => {
-    fetchTodaysWeather();
-  },[cityName]);
-
-
   let weekWeatherArray = [];
   let tempsArray = [];
-  //setHoursTempature, setWeekWeatherを動かす
   const fetchWeekWeather = () => {
     const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latLng.lat +'&lon=' + latLng.lng + '&lang=ja&appid='+ openWeatherApiKey;
 
@@ -140,10 +124,6 @@ function App() {
     })
   }
 
-  useEffect(()=> {
-    fetchWeekWeather();
-  }, [latLng]);
-
 
   let initialCurrentTime = new Date();
   let year = initialCurrentTime.getUTCFullYear()
@@ -157,7 +137,6 @@ function App() {
   let minute = initialCurrentTime.getUTCMinutes()
   let sec = initialCurrentTime.getSeconds()
 
-
   const [currentTime, setCurrentTime] = useState({
     wholeTime: initialCurrentTime,
     year: year,
@@ -168,6 +147,16 @@ function App() {
     minute: minute,
     sec: sec
   })
+
+  useEffect( () => {
+    fetchCurrentLatLng();
+  }, []);
+  useEffect( () => {
+    fetchTodaysWeather();
+  },[cityName]);
+ useEffect(()=> {
+    fetchWeekWeather();
+  }, [latLng]);
 
   return (
     <div className="App">
