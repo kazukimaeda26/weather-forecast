@@ -146,7 +146,7 @@ p {
 }
 
 .weatherLists {
-  width: 16rem;
+  width: 18rem;
 }
 
 .weatherListsTop {
@@ -160,6 +160,21 @@ p {
   align-items: center;
   justify-content: space-around;
   margin-bottom: 0.1rem;
+}
+
+.weatherListTemp{
+  display: flex;
+  align-items: center;
+}
+.weatherListTempLeft {
+  width: 70px;
+  text-align: left;
+  margin-right: 5px;
+}
+.weatherListTempRight {
+  width: 70px;
+  text-align: left;
+  margin-left: 10px
 }
 
 .weatherListDate {

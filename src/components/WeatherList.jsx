@@ -16,7 +16,11 @@ const WeatherList = (props) => {
         {props.value.month}月{props.value.date}日
       </div>
       <img className="weatherImg" src={iconUrl} alt="画像" />
-      <p className="weatherListTemp">{kelvinToCelsius(props.value.tempMax)} ℃/{kelvinToCelsius(props.value.tempMin)}℃</p>
+      <div className="weatherListTemp">
+        <p className="weatherListTempLeft">{kelvinToCelsius(props.value.tempMax)} ℃</p>
+        /
+        <p className="weatherListTempRight">{kelvinToCelsius(props.value.tempMin)}℃</p>
+      </div>
     </div>
   )
 }
