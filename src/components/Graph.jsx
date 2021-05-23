@@ -17,7 +17,7 @@ const Graph = (props) => {
   let data = [];
     for(let i = 0; i < 13; i++) {
       data.push({
-        name: hours[0]+'時',
+        name: hours[i]+'時',
         temp: kelvinToCelsius(props.tempsPerHour[i])
       })
     }
