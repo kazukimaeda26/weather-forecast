@@ -11,17 +11,7 @@ function App() {
 
   const [latLng, setLatLng] = useState({lat: 30, lng: 130});
   const [cityName, setCityName] = useState('札幌市');
-  const [todaysWeather, setTodaysWeather] = useState({
-    iconNum: '10d',
-    temp: 20,
-    feelsLike: 18,
-    tempMax: 23,
-    tempMin: 17,
-    windSpeed: 0,
-    windDeg: 350,
-    pressure: 1020,
-    humidity: 55
-  });
+  const [todaysWeather, setTodaysWeather] = useState({});
   const [weekWeather, setWeekWeather] = useState([]);
   const [tempsPerHour, setTempsPerHour] = useState([]);
   
