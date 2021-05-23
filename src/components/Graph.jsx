@@ -11,62 +11,16 @@ const Graph = (props) => {
     hours[i] = hours[i].getHours();
   }
   const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15)*10)/10;
+    return Math.floor((num - 273.15)*100)/100;
   }
 
   let data = [];
-     data.push({
-      name: hours[0]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.zero)
-    })
-    data.push({
-      name: hours[1]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.one)
-    })
-    data.push({
-      name: hours[2]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.two)
-    })
-    data.push({
-      name: hours[3]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.three)
-    })
-    data.push({
-      name: hours[4]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.four)
-    })
-    data.push({
-      name: hours[5]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.five)
-    })
-    data.push({
-      name: hours[6]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.six)
-    })
-    data.push({
-      name: hours[7]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.seven)
-    })
-    data.push({
-      name: hours[8]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.eight)
-    })
-    data.push({
-      name: hours[9]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.nine)
-    })
-    data.push({
-      name: hours[10]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.ten)
-    })
-    data.push({
-      name: hours[11]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.eleven)
-    })
-    data.push({
-      name: hours[12]+'時',
-      temp: kelvinToCelsius(props.hoursTempature.twelve)
-    })
+    for(let i = 0; i < 13; i++) {
+      data.push({
+        name: hours[0]+'時',
+        temp: kelvinToCelsius(props.tempsPerHour[i])
+      })
+    }
   
   return(
     <ResponsiveContainer width="100%" height="100%">

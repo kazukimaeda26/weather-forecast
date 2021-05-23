@@ -6,7 +6,7 @@ const TodaysWeather = (props) => {
     return 'http://openweathermap.org/img/wn/' + iconNum + '@2x.png';
   }
   const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15)*10)/10;
+    return Math.floor((num - 273.15)*100)/100;
   }
 
   const weatherIconUrl = createWeatherImgUrl(props.todaysWeather.iconNum);

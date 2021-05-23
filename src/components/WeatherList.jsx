@@ -6,14 +6,14 @@ const WeatherList = (props) => {
   }
 
   const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15)*10)/10;
+    return Math.floor((num - 273.15)*100)/100;
   }
 
   const iconUrl = createWeatherImgUrl(props.value.icon);
   return(
     <div className="weatherList">
       <div className="weatherListDate">
-        {props.value.month}月{props.value.day}日
+        {props.value.month}月{props.value.date}日
       </div>
       <img className="weatherImg" src={iconUrl} alt="画像" />
       <p className="weatherListTemp">{kelvinToCelsius(props.value.tempMax)} ℃/{kelvinToCelsius(props.value.tempMin)}℃</p>
