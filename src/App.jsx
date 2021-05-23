@@ -23,21 +23,24 @@ function App() {
     humidity: 55
   });
   const [weekWeather, setWeekWeather] = useState([]);
-  const [hoursTempature, setHoursTempature] = useState({
-    zero: 25,
-    one: 25,
-    two: 25,
-    three: 25,
-    four: 25,
-    five: 25,
-    six: 25,
-    seven: 25,
-    eight: 25,
-    nine: 25,
-    ten: 25,
-    eleven: 25,
-    twelve: 25,
-  })
+  const [tempsPerHour, setTempsPerHour] = useState(
+    []
+    // {
+    //   zero: 25,
+    //   one: 25,
+    //   two: 25,
+    //   three: 25,
+    //   four: 25,
+    //   five: 25,
+    //   six: 25,
+    //   seven: 25,
+    //   eight: 25,
+    //   nine: 25,
+    //   ten: 25,
+    //   eleven: 25,
+    //   twelve: 25,
+    // }
+  );
   
 
   // 現在位置情報のlatとlngを定義する.
@@ -138,6 +141,7 @@ function App() {
 
 
   let weekWeatherArray = [];
+  let tempsArray = [];
   //setHoursTempature, setWeekWeatherを動かす
   const fetchWeekWeather = () => {
     const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latLng.lat +'&lon=' + latLng.lng + '&lang=ja&appid='+ openWeatherApiKey;
@@ -156,27 +160,16 @@ function App() {
       }
       setWeekWeather(weekWeatherArray);
       
-      setHoursTempature({
-        zero: data.hourly[0].temp,
-        one: data.hourly[1].temp,
-        two: data.hourly[2].temp,
-        three: data.hourly[3].temp,
-        four: data.hourly[4].temp,
-        five: data.hourly[5].temp,
-        six: data.hourly[6].temp,
-        seven:data.hourly[7].temp,
-        eight:data.hourly[8].temp,
-        nine: data.hourly[9].temp,
-        ten: data.hourly[10].temp,
-        eleven: data.hourly[11].temp,
-        twelve: data.hourly[12].temp
-      })
+      for(let i = 0; i < 13; i++){
+        tempsArray.push(data.hourly[i].temp)
+      }
+      setTempsPerHour(tempsArray);
     })
   }
 
   useEffect(()=> {
     fetchWeekWeather();
-  }, [cityName]);
+  }, [latLng]);
 
 
   let initialCurrentTime = new Date();
@@ -211,7 +204,7 @@ function App() {
         <div className="tempaturesLineGraph">
           <p className="everyHour">1時間ごとの気温</p>
           <div className="graphWrapper">
-            <Graph hoursTempature={hoursTempature}/>
+            <Graph tempsPerHour={tempsPerHour}/>
           </div>
         </div>
         <WeatherLists weekWeather={weekWeather}/>
