@@ -23,24 +23,7 @@ function App() {
     humidity: 55
   });
   const [weekWeather, setWeekWeather] = useState([]);
-  const [tempsPerHour, setTempsPerHour] = useState(
-    []
-    // {
-    //   zero: 25,
-    //   one: 25,
-    //   two: 25,
-    //   three: 25,
-    //   four: 25,
-    //   five: 25,
-    //   six: 25,
-    //   seven: 25,
-    //   eight: 25,
-    //   nine: 25,
-    //   ten: 25,
-    //   eleven: 25,
-    //   twelve: 25,
-    // }
-  );
+  const [tempsPerHour, setTempsPerHour] = useState([]);
   
 
   // 現在位置情報のlatとlngを定義する.
@@ -77,7 +60,7 @@ function App() {
   }, []);
 
   //都市名の検索があった場合,cityNameを検索した都市名で定義.
-  const setSearchedLocation = () => {
+  const searchFromCityName = () => {
     const input = document.querySelector('#searchInput').value;
     setCityName(input);
     fetchLatLngFromCityName(input);
@@ -198,7 +181,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header setSearchedLocation={setSearchedLocation}/>
+      <Header searchFromCityName={searchFromCityName}/>
       <TodaysWeather cityName={cityName} todaysWeather={todaysWeather} currentTime={currentTime}/>
       <div className="main">
         <div className="tempaturesLineGraph">
