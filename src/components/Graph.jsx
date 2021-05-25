@@ -10,15 +10,12 @@ const Graph = (props) => {
     hours[i].setHours(hours[i].getHours()+i);
     hours[i] = hours[i].getHours();
   }
-  const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15)*100)/100;
-  }
-
+  
   let data = [];
     for(let i = 0; i < 8; i++) {
       data.push({
         name: hours[i]+'時',
-        temp: kelvinToCelsius(props.tempsPerHour[i])
+        temp: props.tempsPerHour[i]
       })
     }
   

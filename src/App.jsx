@@ -71,7 +71,7 @@ function App() {
   }
 
   const fetchTodaysWeather = () => {
-    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latLng.lat + '&lon=' + latLng.lng +'&lang=ja&appid=' + openWeatherApiKey
+    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latLng.lat + '&lon=' + latLng.lng +'&lang=ja&units=metric&appid=' + openWeatherApiKey
 
     fetch(openWeatherApiUrl,{
       method: 'POST'
@@ -104,7 +104,7 @@ function App() {
   let weekWeatherArray = [];
   let tempsArray = [];
   const fetchWeekWeather = () => {
-    const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latLng.lat +'&lon=' + latLng.lng + '&lang=ja&appid='+ openWeatherApiKey;
+    const openWeatherOneCallApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latLng.lat +'&lon=' + latLng.lng + '&lang=ja&units=metric&appid='+ openWeatherApiKey;
 
     fetch(openWeatherOneCallApiUrl,{
       method: 'POST'

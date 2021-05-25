@@ -5,8 +5,8 @@ const WeatherList = (props) => {
     return 'http://openweathermap.org/img/wn/' + iconNum + '@2x.png';
   }
 
-  const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15));
+  const rounding = (temp) => {
+    return Math.floor(temp);
   }
 
   const iconUrl = createWeatherImgUrl(props.value.icon);
@@ -17,9 +17,9 @@ const WeatherList = (props) => {
       </div>
       <img className="weatherImg" src={iconUrl} alt="画像" />
       <div className="weatherListTemp">
-        <p className="weatherListTempLeft">{kelvinToCelsius(props.value.tempMax)} ℃</p>
+        <p className="weatherListTempLeft">{rounding(props.value.tempMax)} ℃</p>
         /
-        <p className="weatherListTempRight">{kelvinToCelsius(props.value.tempMin)}℃</p>
+        <p className="weatherListTempRight">{rounding(props.value.tempMin)}℃</p>
       </div>
     </div>
   )
