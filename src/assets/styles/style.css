@@ -78,9 +78,15 @@ p {
 }
 /* header end */
 
+.todaysWeatherAndMapWrapper {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
 /* todaysForecast start */
 .todaysForecastWrapper {
   margin-bottom: 0.6rem;
+  margin-right: 5rem;
 }
 
 .todaysDate {
@@ -126,6 +132,13 @@ p {
 }
 /* todaysDetail end */
 
+/* googleMapWrapper start*/
+.googleMapWrapper {
+  width: 22rem;
+  height: 12rem;
+}
+
+/* googleMapWrapper end */
 /* main start */
 .main {
   display: flex;
