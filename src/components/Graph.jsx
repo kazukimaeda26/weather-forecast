@@ -15,7 +15,7 @@ const Graph = (props) => {
   }
 
   let data = [];
-    for(let i = 0; i < 13; i++) {
+    for(let i = 0; i < 8; i++) {
       data.push({
         name: hours[i]+'時',
         temp: kelvinToCelsius(props.tempsPerHour[i])
@@ -36,10 +36,8 @@ const Graph = (props) => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
+        <XAxis dataKey="name" label={{value: "時刻", position: "insideBottom", offset: 0}} />
+        <YAxis label={{value: "気温"}}/>
         <Line type="monotone" dataKey="temp" stroke="#8884d8" activeDot={{ r: 8 }} />
       </LineChart>
     </ResponsiveContainer>
