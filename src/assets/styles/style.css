@@ -181,12 +181,12 @@ p {
   align-items: center;
 }
 .weatherListTempLeft {
-  width: 70px;
+  width: 45px;
   text-align: left;
   margin-right: 5px;
 }
 .weatherListTempRight {
-  width: 70px;
+  width: 45px;
   text-align: left;
   margin-left: 10px
 }
