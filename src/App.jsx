@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react';
 import './assets/styles/style.css';
-
 import {TodaysWeather, WeatherLists, Header, Graph, Map} from './components/index';
 
 
