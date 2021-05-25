@@ -1,6 +1,6 @@
-import Amplify from "aws-amplify";
-import awsExports from "./aws-exports";
-Amplify.configure(awsExports);
+// import Amplify from "aws-amplify";
+// import awsExports from "./aws-exports";
+// Amplify.configure(awsExports);
 
 export {default as WeatherLists} from './WeatherLists';
 export {default as WeatherList} from './WeatherList';
