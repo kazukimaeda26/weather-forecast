@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-weatherforecast-dev-210148-authRole",
+            "UnauthRoleArn": "arn:aws:iam::214474572347:role/amplify-weatherforecast-dev-210148-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::214474572347:role/amplify-weatherforecast-dev-210148-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-weatherforecast-dev-210148-deployment",
+            "UnauthRoleName": "amplify-weatherforecast-dev-210148-unauthRole",
+            "StackName": "amplify-weatherforecast-dev-210148",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:214474572347:stack/amplify-weatherforecast-dev-210148/fdad2bb0-bd50-11eb-afde-0afdf5207e69",
+            "AmplifyAppId": "dkkggvwng1c7q"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "dkkggvwng1c7q",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}
