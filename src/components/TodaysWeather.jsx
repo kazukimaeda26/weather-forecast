@@ -5,18 +5,17 @@ const TodaysWeather = (props) => {
   const createWeatherImgUrl = (iconNum) => {
     return 'http://openweathermap.org/img/wn/' + iconNum + '@2x.png';
   }
-  const kelvinToCelsius = (num) => {
-    return Math.floor((num - 273.15)*100)/100;
-  }
 
   const weatherIconUrl = createWeatherImgUrl(props.todaysWeather.iconNum);
-  const temp = kelvinToCelsius(props.todaysWeather.temp);
-  const feelsLike = kelvinToCelsius(props.todaysWeather.feelsLike);
-  const tempMax = kelvinToCelsius(props.todaysWeather.tempMax);
-  const tempMin = kelvinToCelsius(props.todaysWeather.tempMin);
+  const temp = props.todaysWeather.temp;
+  const feelsLike = props.todaysWeather.feelsLike;
+  const tempMax = props.todaysWeather.tempMax;
+  const tempMin = props.todaysWeather.tempMin;
   const windSpeed = props.todaysWeather.windSpeed;
+  const windDeg = props.todaysWeather.windDeg;
   const pressure = props.todaysWeather.pressure;
   const humidity = props.todaysWeather.humidity;
+
   return(
     <div className="todaysForecastWrapper">
       <TodaysDate currentTime={props.currentTime}/>
