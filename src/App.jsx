@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import './assets/styles/style.css';
 
-import {TodaysWeather, WeatherLists, Header, Graph} from './components/index';
+import {TodaysWeather, WeatherLists, Header, Graph, Map} from './components/index';
 
 
 function App() {
@@ -163,7 +163,12 @@ function App() {
   return (
     <div className="App">
       <Header searchFromCityName={searchFromCityName}/>
-      <TodaysWeather cityName={cityName} todaysWeather={todaysWeather} currentTime={currentTime}/>
+      <div className="todaysWeatherAndMapWrapper">
+        <TodaysWeather cityName={cityName} todaysWeather={todaysWeather} currentTime={currentTime}/>
+        <div className="googleMapWrapper">
+          <Map googleApiKey={googleApiKey} latLng={latLng} />
+        </div>
+      </div>
       <div className="main">
         <div className="tempaturesLineGraph">
           <p className="everyHour">1時間ごとの気温</p>
