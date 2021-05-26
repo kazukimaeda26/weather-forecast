@@ -10,8 +10,6 @@ const Map = (props) =>  {
     lng: props.latLng.lng
   }
 
-  console.log(position);
-
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: '100%', width: '100%' }}>

@@ -9,13 +9,13 @@ const WeatherLists = (props) => {
   for(let i = 0; i < 7; i++){
     let day = new Date();
     day.setDate(day.getDate() + i);
-    day.setMonth(day.getMonth() + 1);
+    // day.setMonth(day.getMonth() + 1);
     weekWeatherAndDay.push({
-      month: day.getMonth(),
+      month: day.getMonth()+1,
       date: day.getDate()
     });
   }
-  
+
   for(let i = 0; i < 7; i++){
     Object.assign(weekWeatherAndDay[i] ,weekWeather[i]);
   };
