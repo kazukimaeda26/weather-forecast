@@ -1,71 +1,45 @@
-# Getting Started with Create React App
+READ ME
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 天気予報アプリの概要
 
-## Available Scripts
+React の知識・技術の定着のため、天気予報アプリを 1 から作成しました。
 
-In the project directory, you can run:
+api をたたき、現在位置を取得し、その現在位置を基に天気の情報を取得しています。
 
-### `yarn start`
+また、特定の地域も検索バーに入力をすれば検索できます。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+下記の URL からアクセスできます。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+https://main.dkkggvwng1c7q.amplifyapp.com/
 
-### `yarn test`
+# 機能紹介
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 現在位置取得機能
 
-### `yarn build`
+google の Geolocation API を用いて、現在位置の取得を実装した。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 検索位置取得機能
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+google の Geocoding API を用いて、検索した文字から地域の情報を取得した。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 天気情報取得機能
 
-### `yarn eject`
+上記の「現在位置取得機能」、「検索位置取得機能」を用いて取得した位置情報を Open Weather に送り、その地域の天気の情報を取得した。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![](https://19yw4b240vb03ws8qm25h366-wpengine.netdna-ssl.com/wp-content/uploads/OPENWEATHER-300x136.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 苦労した点
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### React の状態管理の流れの理解
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+アプリケーションを作成し始めた当初は、React の状態管理の流れを把握できておらず、苦労しました。
+今までに学習のために作成していたアプリのコードを何度も見直しました。
+具体的には、console.log や debugger を用いて、1 行ずつコードが何を行っているのかを把握しました。
 
-## Learn More
+その後、天気予報アプリではどう実装すればいいのかを考えて少しずつ実装していきました。
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### API の利用方法
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+上記の「React の状態管理の流れの理解」と同様にすでに作成していた api をたたくアプリケーションの流れを見直し、天気予報アプリに実装していきました。
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+また Open Weather API の英文の 1 次ソースや google の英文の 1 次ソースを読み実装をしていきました。
